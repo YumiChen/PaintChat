@@ -4,7 +4,8 @@
   "description": "A chat app using WebSockets",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack-dev-server --hot --inline"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,7 @@
     "body-parser": "^1.17.2",
     "css-loader": "^0.28.4",
     "express": "^4.15.2",
+    "node-sass": "^4.5.3",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "react": "^15.6.1",
@@ -36,6 +38,11 @@
     "webpack": "^3.5.4"
   },
   "devDependencies": {
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.11.0",
+    "webpack": "^3.5.4",
+    // problematic
+    "webpack-dev-middleware": "^1.12.0",
+    "webpack-dev-server": "^2.7.1",
+    "webpack-hot-middleware": "^2.18.2"
   }
 }

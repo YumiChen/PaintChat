@@ -23,4 +23,14 @@ module.exports = [{
   resolve: {
     extensions: ['.js','.sass', ".jsx"]
   }
+//  devtool: 'cheap-eval-source-map',
+//  devServer: {
+//    contentBase: './public',
+//    hot: true
+//  },
+//  plugins: [
+//    new webpack.optimize.OccurrenceOrderPlugin(),
+//    new webpack.HotModuleReplacementPlugin(),
+//    new webpack.NoEmitOnErrorsPlugin()
+//  ]
 }];
