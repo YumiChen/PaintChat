@@ -4,6 +4,14 @@ var Passport = require( 'passport' );
 var LocalStrategy = require( 'passport-local' ).Strategy;
 var BodyParser = require( 'body-parser' );
 
+var path = require('path');
+var webpack = require('webpack');
+var config = require('./webpack.config');
+var compiler = webpack(config);
+
+var webpackDevMiddleware = require("webpack-dev-middleware");
+var webpackHotMiddleware = require("webpack-hot-middleware");
+
 var users = {
   Mio: {
     username: 'Mio',
@@ -39,6 +47,28 @@ var app = express();
 var server = app.listen(4000, function(){
     console.log('listening for requests on port 4000,');
 });
+
+// app.use(require('webpack-dev-middleware')(compiler, {
+//   noInfo: true,
+//   publicPath: config[0].output.publicPath
+// }));
+// app.use(require('webpack-hot-middleware')(compiler));
+
+app.use(webpackDevMiddleware(compiler, {
+  hot: true,
+  filename: 'bundle.js',
+  publicPath: '/src/',
+  stats: {
+    colors: true,
+  },
+  historyApiFallback: true,
+}));
+
+app.use(webpackHotMiddleware(compiler, {
+  log: console.log,
+  path: '/__webpack_hmr',
+  heartbeat: 10 * 1000,
+}));
 
 // Static files
 app.use(express.static('public'));

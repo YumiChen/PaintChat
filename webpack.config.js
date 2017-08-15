@@ -3,7 +3,11 @@ const path = require('path');
 
 // including sass
 module.exports = [{
-  entry: ['./src/index'],
+  entry: [
+    'eventsource-polyfill',
+    // 'webpack-hot-middleware/client',
+    'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
+    './src/index'],
   output: {
     path: path.join(__dirname, '/public'),
     publicPath: '/',
@@ -23,4 +27,17 @@ module.exports = [{
   resolve: {
     extensions: ['.js','.sass', ".jsx"]
   }
+  ,devServer: {
+  contentBase: './public',
+  hot: true
+}
+  ,plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.ProvidePlugin({
+      React: 'react',
+      ReactDOM:'react-dom'
+    }),
+    new webpack.NoErrorsPlugin()
+    // new webpack.NoEmitOnErrorsPlugin()
+  ]
 }];
